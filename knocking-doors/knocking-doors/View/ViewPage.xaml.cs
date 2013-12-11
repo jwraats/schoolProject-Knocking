@@ -15,33 +15,16 @@ using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
-namespace knocking_doors
+namespace knocking_doors.View
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class MainPage : Page
+    public partial class ViewPage : Page
     {
-        private KnockingDoors kd;
-
-        public MainPage()
+        public ViewPage()
         {
             this.InitializeComponent();
-        }
-
-        protected override void OnNavigatedTo(NavigationEventArgs e) {
-           base.OnNavigatedTo(e);
-           KnockingDoors kd = e.Parameter as KnockingDoors;
-           if (kd != null)
-           {
-               this.kd = kd;
-           }
-        }
-
-        private void Proceed_Click(object sender, RoutedEventArgs e)
-        {
-            //kd.Player.Name = 
-            kd.changePage(typeof(View.LevelPage));
         }
     }
 }

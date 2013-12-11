@@ -115,6 +115,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controller\MapController.cs" />
+    <Compile Include="KnockingDoors.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -133,6 +134,9 @@
     </Compile>
     <Compile Include="View\ScorePage.xaml.cs">
       <DependentUpon>ScorePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ViewPage.xaml.cs">
+      <DependentUpon>ViewPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -175,6 +179,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\ScorePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ViewPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
