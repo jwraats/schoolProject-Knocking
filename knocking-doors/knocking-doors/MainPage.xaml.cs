@@ -26,5 +26,10 @@ namespace knocking_doors
         {
             this.InitializeComponent();
         }
+
+        private void Proceed_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(View.LevelPage));
+        }
     }
 }

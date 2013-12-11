@@ -7,7 +7,17 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
+    <Grid Style="{StaticResource StandardBackground}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Image Grid.Row="0" Style="{StaticResource KnockingDoorsLogoStyle}"/>
+        <TextBlock Grid.Row="1" Style="{StaticResource TitleTextBlockStyle}" Text="Hello! What's your name?"/>
+        <TextBox Grid.Row="2" Style="{StaticResource TitleTextBoxStyle}"/>
+        <Button Grid.Row="3" Style="{StaticResource ProceedButtonStyle}" Click="Proceed_Click"/>
     </Grid>
 </Page>
