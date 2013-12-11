@@ -25,7 +25,7 @@
             <Button x:Name="MediumDiffbutton" Grid.Column="1" Content="Ik ben hier wel eens geweest" Style="{StaticResource DifficultyButtonStyle}"/>
             <Button x:Name="HardDiffbutton" Grid.Column="2" Content="Ik ben hier bekend" Style="{StaticResource DifficultyButtonStyle}"/>
         </Grid>
-        <TextBlock Grid.Row="1" Style="{StaticResource TitleTextBlockStyle}" Text="Hoe bekend ben je in dit gebied?"/>
+        <TextBlock x:Name="lbl" Grid.Row="1" Style="{StaticResource TitleTextBlockStyle}" Text="Hoe bekend ben je in dit gebied?"/>
         <Image Grid.Row="0" Style="{StaticResource KnockingDoorsLogoStyle}" HorizontalAlignment="Right"/>
     </Grid>
 </Page>

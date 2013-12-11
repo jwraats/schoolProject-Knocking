@@ -40,7 +40,7 @@ namespace knocking_doors
 
         private void Proceed_Click(object sender, RoutedEventArgs e)
         {
-            //kd.Player.Name = 
+            kd.Player.Name = tbName.Text;
             kd.changePage(typeof(View.LevelPage));
         }
     }

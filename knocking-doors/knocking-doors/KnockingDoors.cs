@@ -21,7 +21,7 @@ namespace knocking_doors
             Player = new Player();
         }
 
-        public KnockingDoors(Frame rootFrame) : base()
+        public KnockingDoors(Frame rootFrame) : this()
         {
             this.rootFrame = rootFrame;
             this.changePage(typeof(MainPage));

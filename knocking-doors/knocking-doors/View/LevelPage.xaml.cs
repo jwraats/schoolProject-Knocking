@@ -22,9 +22,24 @@ namespace knocking_doors.View
     /// </summary>
     public sealed partial class LevelPage : Page
     {
+        private KnockingDoors kd;
+
         public LevelPage()
         {
             this.InitializeComponent();
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+            KnockingDoors kd = e.Parameter as KnockingDoors;
+            if (kd != null)
+            {
+                this.kd = kd;
+                if(kd.Player != null && kd.Player.Name != ""){
+                    lbl.Text = "Hallo " + kd.Player.Name + ", hoe bekend ben je hier? "; 
+                }
+            }
         }
     }
 }
