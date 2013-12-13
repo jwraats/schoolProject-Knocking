@@ -148,6 +148,11 @@
   <ItemGroup>
     <Content Include="Assets\knockingdoors_logo_640x480.png" />
     <Content Include="Assets\Logo.scale-100.png" />
+    <Content Include="Assets\Logo_pngSequence\knockingdoors1.png" />
+    <Content Include="Assets\Logo_pngSequence\knockingdoors2.png" />
+    <Content Include="Assets\Logo_pngSequence\knockingdoors3.png" />
+    <Content Include="Assets\Logo_pngSequence\knockingdoors4.png" />
+    <Content Include="Assets\Logo_pngSequence\knockingdoors5.png" />
     <Content Include="Assets\SmallLogo.scale-100.png" />
     <Content Include="Assets\SplashScreen.scale-100.png" />
     <Content Include="Assets\StoreLogo.scale-100.png" />
