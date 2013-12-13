@@ -37,7 +37,8 @@ namespace knocking_doors.View
             {
                 this.kd = kd;
                 if(kd.Player != null && kd.Player.Name != ""){
-                    lbl.Text = "Hallo " + kd.Player.Name + ", hoe bekend ben je hier? "; 
+                    lbl.Text = "Hallo " + kd.Player.Name + ", hoe bekend ben je hier?";
+                    imgFirstButton.ImageSource = kd.ImageStreet;
                 }
             }
         }
