@@ -23,7 +23,7 @@ namespace knocking_doors.View
     public sealed partial class LevelPage : Page
     {
         private KnockingDoors kd;
-        private enum Difficulties { First_Time, Been_Here, Born_Here };
+        
 
         public LevelPage()
         {
@@ -44,19 +44,29 @@ namespace knocking_doors.View
             }
         }
 
+        private void startGame()
+        {
+            kd.Player.Level.Longitude = kd.Player.Longitude;
+            kd.Player.Level.Latitude = kd.Player.Latitude;
+            kd.changePage(typeof(View.GamePage));
+        }
+
         private void First_Time_Click(object sender, RoutedEventArgs e)
         {
-            
+            kd.Difficult = KnockingDoors.Difficulties.First_Time;
+            startGame();
         }
 
         private void Been_Here_Click(object sender, RoutedEventArgs e)
         {
-
+            kd.Difficult = KnockingDoors.Difficulties.Been_Here;
+            startGame();
         }
 
         private void Born_Here_Click(object sender, RoutedEventArgs e)
         {
-
+            kd.Difficult = KnockingDoors.Difficulties.Born_Here;
+            startGame();
         }
     }
 }
