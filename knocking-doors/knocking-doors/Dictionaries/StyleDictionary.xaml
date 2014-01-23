@@ -4,7 +4,7 @@
     xmlns:local="using:knocking_doors">
 
     <Style x:Key="StandardBackground" TargetType="Grid">
-        <Setter Property="Background" Value="DarkRed"/>
+        <Setter Property="Background" Value="FireBrick"/>
     </Style>
 
     <Style x:Key="ProceedButtonStyle" TargetType="Button">

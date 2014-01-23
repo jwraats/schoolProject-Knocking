@@ -15,8 +15,8 @@
   </Resources>
   <Applications>
     <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="knocking_doors.App">
-      <m2:VisualElements DisplayName="knocking-doors" Square150x150Logo="Assets\Logo.png" Square30x30Logo="Assets\SmallLogo.png" Description="knocking-doors" ForegroundText="light" BackgroundColor="#464646">
-        <m2:SplashScreen Image="Assets\SplashScreen.png" />
+      <m2:VisualElements DisplayName="knocking-doors" Square150x150Logo="Assets\Logo.png" Square30x30Logo="Assets\SmallLogo.png" Description="knocking-doors" ForegroundText="light" BackgroundColor="darkRed">
+        <m2:SplashScreen Image="Assets\SplashScreen.png" BackgroundColor="darkRed" />
       </m2:VisualElements>
     </Application>
   </Applications>
