@@ -94,5 +94,11 @@ namespace knocking_doors.View
         {
             changeDoor();
         }
+
+        private void BackToDiffBtn_Click(object sender, RoutedEventArgs e)
+        {
+            kd.changePlayerLocation();
+            kd.changePage(typeof(View.LevelPage));
+        }
     }
 }
