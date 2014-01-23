@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.Devices.Geolocation;
+using Windows.Devices.Geolocation.Geofencing;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Imaging;
 
@@ -65,7 +66,26 @@ namespace knocking_doors
 
             if (Player.currentDoor != null)
             {
+                Geofence gf = new Geofence("Door"+DateTime.Now.Millisecond, new Geocircle(new BasicGeoposition{ Latitude = Player.currentDoor.Latitude, Longitude = Player.currentDoor.Longitude}, 15));
+                GeofenceMonitor.Current.Geofences.Clear();
+                GeofenceMonitor.Current.GeofenceStateChanged += Current_GeofenceStateChanged;
+                GeofenceMonitor.Current.Geofences.Add(gf);
+
+
                 this.ImageStreet = mc.getImageUrlFromGeoPoint(Player.currentDoor.Address);
+            }
+        }
+
+        private void Current_GeofenceStateChanged(GeofenceMonitor sender, object args)
+        {
+            var reports = sender.ReadReports();
+
+            foreach(GeofenceStateChangeReport report in reports){
+                GeofenceState state = report.NewState;
+                Geofence gf = report.Geofence;
+                if(state == GeofenceState.Entered){
+                    System.Diagnostics.Debug.WriteLine("Je bent er!");
+                }
             }
         }
 

@@ -93,6 +93,7 @@ namespace knocking_doors.View
 
         private void NewDoorBtn_Click(object sender, RoutedEventArgs e)
         {
+            kd.Player.Score -= 10;
             changeDoor();
         }
 
