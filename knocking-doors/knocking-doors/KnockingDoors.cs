@@ -49,12 +49,12 @@ namespace knocking_doors
                 }
                 else if (this.Difficult.Equals(KnockingDoors.Difficulties.Been_Here))
                 {
-                    radius = 15;
+                    radius = 500;
                     timeGiven = 150;
                 }
                 else if (this.Difficult.Equals(KnockingDoors.Difficulties.Born_Here))
                 {
-                    radius = 30;
+                    radius = 1000;
                     timeGiven = 250;
                 }
 
@@ -74,9 +74,10 @@ namespace knocking_doors
             mc.updateLocation();
             if (mc.getGeoposition() != null)
             {
-                this.ImageStreet = mc.getImageUrlFromGeoPoint(mc.getGeoposition().Coordinate.Point);
                 Player.Latitude = mc.getGeoposition().Coordinate.Point.Position.Latitude;
                 Player.Longitude = mc.getGeoposition().Coordinate.Point.Position.Longitude;
+                this.ImageStreet = mc.getImageUrlFromGeoPoint(mc.ReverseGeoLoc(Player.Latitude, Player.Longitude));
+                
                 
             }
         }
