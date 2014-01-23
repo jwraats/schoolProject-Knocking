@@ -23,6 +23,7 @@ namespace knocking_doors.View
     public sealed partial class LevelPage : Page
     {
         private KnockingDoors kd;
+        private enum Difficulties { First_Time, Been_Here, Born_Here };
 
         public LevelPage()
         {
@@ -41,6 +42,21 @@ namespace knocking_doors.View
                     imgFirstButton.ImageSource = kd.ImageStreet;
                 }
             }
+        }
+
+        private void First_Time_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        private void Been_Here_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Born_Here_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

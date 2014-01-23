@@ -24,9 +24,9 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button x:Name="EasyDiffbutton" Grid.Column="0"  Content="Ik ben hier voor het eerst" Style="{StaticResource DifficultyButtonStyle}"/>
-            <Button x:Name="MediumDiffbutton" Grid.Column="1" Content="Ik ben hier wel eens geweest" Style="{StaticResource DifficultyButtonStyle}"/>
-            <Button x:Name="HardDiffbutton" Grid.Column="2" Content="Ik ben hier bekend" Style="{StaticResource DifficultyButtonStyle}"/>
+            <Button x:Name="EasyDiffbutton" Grid.Column="0"  Content="Ik ben hier voor het eerst" Style="{StaticResource DifficultyButtonStyle}" Click="First_Time_Click"/>
+            <Button x:Name="MediumDiffbutton" Grid.Column="1" Content="Ik ben hier wel eens geweest" Style="{StaticResource DifficultyButtonStyle}" Click="Been_Here_Click"/>
+            <Button x:Name="HardDiffbutton" Grid.Column="2" Content="Ik ben hier bekend" Style="{StaticResource DifficultyButtonStyle}" Click="Born_Here_Click"/>
         </Grid>
         <TextBlock x:Name="lbl" Grid.Row="1" Style="{StaticResource TitleTextBlockStyle}" Text="Hoe bekend ben je in dit gebied?"/>
         <Image Grid.Row="0" Style="{StaticResource KnockingDoorsLogoStyle}" HorizontalAlignment="Right"/>
