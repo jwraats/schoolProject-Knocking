@@ -40,6 +40,7 @@ namespace knocking_doors.Controller
             geolocator = new Geolocator();
             geolocator.DesiredAccuracy = Windows.Devices.Geolocation.PositionAccuracy.High;
             
+            
             //For get location;
             pos = null;
             this.updateLocation(); //One time get Location.
