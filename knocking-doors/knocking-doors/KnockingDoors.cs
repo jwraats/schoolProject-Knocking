@@ -14,7 +14,7 @@ namespace knocking_doors
 {
     public class KnockingDoors
     {
-        private MapController mc;
+        public MapController mc { get; private set; }
         private Frame rootFrame;
         public Player Player { get; set; }
         public BitmapImage ImageStreet;

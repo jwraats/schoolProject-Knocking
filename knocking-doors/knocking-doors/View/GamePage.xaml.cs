@@ -56,7 +56,6 @@ namespace knocking_doors.View
                         DiffText.Text = "First Timer";
                         break;
                 }
-                ScoreText.DataContext = kd.Player.Score;
                 this.changeDoor();  //Eerste keer deur maken!
             }
         }
@@ -87,7 +86,8 @@ namespace knocking_doors.View
         private void changeDoor()
         {
             kd.changeDoor();
-            
+            Address.Text = kd.Player.currentDoor.Address;
+            DistanceFromDoorText.Text = kd.mc.GetDistanceBetweenPoints(kd.Player.Latitude, kd.Player.Longitude, kd.Player.currentDoor.Latitude, kd.Player.currentDoor.Longitude)+" Meters";
             DoorPanel.ImageSource = kd.ImageStreet;
         }
 
