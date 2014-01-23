@@ -5,6 +5,8 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -23,6 +25,8 @@ namespace knocking_doors.View
     public sealed partial class GamePage : Page
     {
         KnockingDoors kd;
+        SolidColorBrush brush = new SolidColorBrush();
+        double myDbl = 0;
 
         public GamePage()
         {
@@ -33,6 +37,7 @@ namespace knocking_doors.View
         {
             base.OnNavigatedTo(e);
             KnockingDoors kd = e.Parameter as KnockingDoors;
+            brush.Color = Color.FromArgb(255, 0, 0, 255);
             if (kd != null)
             {
                 this.kd = kd;
@@ -55,11 +60,27 @@ namespace knocking_doors.View
             }
         }
 
-        public void UpdateDistanceIcon()
+        public void UpdateDistanceIcon(double d)
         {
-            string red = "FF0000";
-            string blue = "#0000FF";
-            //DistanceIcon.Fill = ;
+            if (d > 1 | d < 0)
+                return;
+
+            if (d < 0.2)
+                DistanceText.Text = "Je bent koud";
+            else if (d < 0.4)
+                DistanceText.Text = "Je bent lauw";
+            else if (d < 0.6)
+                DistanceText.Text = "Je begint in de buurt te komen";
+            else if (d < 0.8)
+                DistanceText.Text = "Je bent warm!";
+            else if (d < 0.95)
+                DistanceText.Text = "Je bent heel erg warm!";
+            else
+                DistanceText.Text = "Heet! Heet! Heet!";
+
+            byte red = (byte)Math.Floor(255*d);
+            byte blue = (byte)Math.Floor(255-255*d);
+            DistanceIcon.Fill = new SolidColorBrush(Color.FromArgb(255, red, 0, blue));
         }
 
         private void changeDoor()
