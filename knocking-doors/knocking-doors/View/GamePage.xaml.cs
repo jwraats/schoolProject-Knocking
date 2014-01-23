@@ -86,7 +86,7 @@ namespace knocking_doors.View
         private void changeDoor()
         {
             kd.changeDoor();
-            DiffText.Text = kd.Player.currentDoor.Address;
+            DiffText.Text += "\n"+kd.Player.currentDoor.Address;
             DoorPanel.ImageSource = kd.ImageStreet;
         }
 
