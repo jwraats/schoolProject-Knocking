@@ -56,6 +56,7 @@ namespace knocking_doors.View
                         DiffText.Text = "First Timer";
                         break;
                 }
+                ScoreText.DataContext = kd.Player.Score;
                 this.changeDoor();  //Eerste keer deur maken!
             }
         }
