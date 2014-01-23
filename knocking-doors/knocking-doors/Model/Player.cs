@@ -13,5 +13,10 @@ namespace knocking_doors.Model
         public string CityName { get; set; }
         public double Longitude { get; set; }
         public double Latitude { get; set; }
+
+        public Player()
+        {
+            Level = new Level();
+        }
     }
 }
