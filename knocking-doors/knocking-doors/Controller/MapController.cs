@@ -6,6 +6,15 @@ using System.Threading.Tasks;
 using Bing.Maps;
 using Windows.Devices.Geolocation;
 using Windows.UI.Xaml.Media.Imaging;
+using System;
+using System.Threading;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Xml;
+using Windows.Data.Xml.Dom;
+using System.Xml.Linq;
+
 
 
 namespace knocking_doors.Controller
@@ -34,6 +43,17 @@ namespace knocking_doors.Controller
             //For get location;
             pos = null;
             this.updateLocation(); //One time get Location.
+        }
+
+        public BitmapImage getImageUrlFromGeoPoint(string address)
+        {
+
+            string url = "https://cdn1.iconfinder.com/data/icons/musthave/128/Help.png";
+            if (address != "" && address != null && address != " ")
+            {
+                url = "http://maps.googleapis.com/maps/api/streetview?size=640x640&location=" + address + "&sensor=false";
+            }
+            return new BitmapImage(new Uri(url, UriKind.Absolute));
         }
 
 
@@ -109,6 +129,45 @@ namespace knocking_doors.Controller
 
             }
             catch { }
+        }
+
+
+        public string ReverseGeoLoc(double latitude, double longitude)
+        {
+            try
+            {
+
+                System.Diagnostics.Debug.WriteLine("http://maps.googleapis.com/maps/api/geocode/xml?latlng=" + latitude + "," + longitude + "&sensor=false");
+                using (XmlReader reader = XmlReader.Create("http://maps.googleapis.com/maps/api/geocode/xml?latlng=" + latitude + "," + longitude + "&sensor=false")) {
+                    while (reader.Read())
+                    {
+                        switch (reader.NodeType)
+                        {
+                            case XmlNodeType.Element:
+                                if (reader.Name == "result")
+                                {
+                                    XElement el = XElement.ReadFrom(reader) as XElement;
+                                    if (el != null)
+                                    {
+                                        return el.Element("formatted_address").Value;
+                                    }
+                                }
+                                break;
+                        }
+                    } 
+
+
+                    return reader.ReadElementContentAsString();
+                }
+                return "Oeepppsss...";
+                
+
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine( ex.Message);
+                return "Jammmeeerrrr";
+            }
         }
 
     }

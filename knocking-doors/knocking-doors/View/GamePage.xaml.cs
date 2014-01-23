@@ -51,6 +51,7 @@ namespace knocking_doors.View
                         DiffText.Text = "First Timer";
                         break;
                 }
+                this.changeDoor();  //Eerste keer deur maken!
             }
         }
 
@@ -64,7 +65,8 @@ namespace knocking_doors.View
         private void changeDoor()
         {
             kd.changeDoor();
-            
+            DiffText.Text = kd.Player.currentDoor.Address;
+            DoorPanel.ImageSource = kd.ImageStreet;
         }
     }
 }

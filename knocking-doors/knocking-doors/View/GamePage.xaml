@@ -13,8 +13,11 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Grid x:Name="DoorPanel" Grid.Column="0" Background="White" Margin="10">
-        </Grid>
+        <Grid Style="{StaticResource StandardBackground}" Grid.Column="0" Margin="10">
+                <Grid.Background>
+                    <ImageBrush x:Name="DoorPanel" ImageSource="../mypath/myimage.png"/>
+                </Grid.Background>
+            </Grid>
 
         <Grid Grid.Column="1" Background="Black" Margin="10">
             <StackPanel Orientation="Vertical" Margin="10">

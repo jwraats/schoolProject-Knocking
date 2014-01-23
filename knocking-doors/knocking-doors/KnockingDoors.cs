@@ -59,13 +59,13 @@ namespace knocking_doors
                 }
 
                 BasicGeoposition basGeo = mc.getRandomGeoposition(Player.Level.Longitude, Player.Level.Latitude, radius);
-                Player.currentDoor = new Door() { Latitude = basGeo.Latitude, Longitude = basGeo.Longitude, TimeLeft = timeGiven };
+                Player.currentDoor = new Door() { Latitude = basGeo.Latitude, Longitude = basGeo.Longitude, TimeLeft = timeGiven, Address = mc.ReverseGeoLoc(basGeo.Latitude, basGeo.Longitude) };
 
             }
 
             if (Player.currentDoor != null)
             {
-                this.ImageStreet = mc.getImageUrlFromGeoPoint(Player.currentDoor.Longitude, Player.currentDoor.Latitude);
+                this.ImageStreet = mc.getImageUrlFromGeoPoint(Player.currentDoor.Address);
             }
         }
 
