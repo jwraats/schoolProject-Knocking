@@ -22,9 +22,22 @@ namespace knocking_doors.View
     /// </summary>
     public sealed partial class GamePage : Page
     {
+        KnockingDoors kd;
+
         public GamePage()
         {
             this.InitializeComponent();
         }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+            KnockingDoors kd = e.Parameter as KnockingDoors;
+            if (kd != null)
+            {
+                this.kd = kd;
+            }
+        }
+
     }
 }

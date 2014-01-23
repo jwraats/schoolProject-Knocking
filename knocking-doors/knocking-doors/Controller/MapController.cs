@@ -47,9 +47,38 @@ namespace knocking_doors.Controller
 
         public string getCityName()
         {
-            
             return "Onbekend";
         }
+
+
+        public BasicGeoposition getRandomGeoposition(double longitude, double latitude, int radius)
+        {
+            Random r = new Random();
+            BasicGeoposition newLocation = new BasicGeoposition();
+            
+
+            double radiusInDegrees = radius / 111000f;
+
+            double u, v, w, t, x, y, new_x, randomLong, randomLat;
+
+            u = r.NextDouble();
+            v = r.NextDouble();
+            w = radiusInDegrees * Math.Sqrt(u);
+            t = 2 * Math.PI * v;
+            x = w * Math.Cos(t);
+            y = w * Math.Sin(t);
+
+            new_x = x / Math.Cos(longitude);
+            randomLong = new_x + longitude;
+            randomLat = y + latitude;
+
+            newLocation.Longitude = randomLong;
+            newLocation.Latitude = randomLat;
+
+            return newLocation;
+
+        }
+
 
         public Geoposition getGeoposition()
         {

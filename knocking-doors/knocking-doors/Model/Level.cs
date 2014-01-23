@@ -10,5 +10,7 @@ namespace knocking_doors.Model
     {
         public string Name { set; get; }
         public double GeoRange { set; get; }
+        public double Longitude { get; set; }
+        public double Latitude { get; set; }
     }
 }

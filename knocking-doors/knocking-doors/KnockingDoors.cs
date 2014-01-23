@@ -16,6 +16,8 @@ namespace knocking_doors
         private Frame rootFrame;
         public Player Player { get; set; }
         public BitmapImage ImageStreet;
+        public enum Difficulties { First_Time, Been_Here, Born_Here };
+        public Difficulties Difficult { get; set; }
 
         public KnockingDoors()
         {
