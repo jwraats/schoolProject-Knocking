@@ -84,7 +84,7 @@ namespace knocking_doors
                 GeofenceState state = report.NewState;
                 Geofence gf = report.Geofence;
                 if(state == GeofenceState.Entered){
-                    System.Diagnostics.Debug.WriteLine("Je bent er!");
+                    Player.Score += 50;
                 }
             }
         }
