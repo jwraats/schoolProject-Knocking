@@ -6,7 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-
+    
     <Grid Style="{StaticResource StandardBackground}">
         <Grid.Background>
             <ImageBrush x:Name="imgFirstButton" ImageSource="../mypath/myimage.png"/>
@@ -28,7 +28,10 @@
             <Button x:Name="MediumDiffbutton" Grid.Column="1" Content="Ik ben hier wel eens geweest" Style="{StaticResource DifficultyButtonStyle}" Click="Been_Here_Click"/>
             <Button x:Name="HardDiffbutton" Grid.Column="2" Content="Ik ben hier bekend" Style="{StaticResource DifficultyButtonStyle}" Click="Born_Here_Click"/>
         </Grid>
-        <TextBlock x:Name="lbl" Grid.Row="1" Style="{StaticResource TitleTextBlockStyle}" Text="Hoe bekend ben je in dit gebied?"/>
+        <Grid Grid.Row="1">
+            <Rectangle Grid.Row="1" Fill="#50000000"/>
+            <TextBlock x:Name="lbl" Grid.Row="1" Style="{StaticResource TitleTextBlockStyle}" Text="Hoe bekend ben je in dit gebied?"/>
+        </Grid>
         <Image Grid.Row="0" Style="{StaticResource KnockingDoorsLogoStyle}" HorizontalAlignment="Right"/>
     </Grid>
 </Page>

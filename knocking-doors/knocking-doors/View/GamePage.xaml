@@ -8,6 +8,19 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
 
+        <Grid Grid.Column="0" Background="White" Margin="10">
+        </Grid>
+
+        <Grid Grid.Column="1" Background="Black" Margin="10">
+            <StackPanel Orientation="Vertical" Margin="10">
+                <TextBlock x:Name="DiffText" Text="Placeholder" Style="{StaticResource StandardTextBlockStyle}"/>       
+                <Rectangle x:Name="DistanceIcon" Height="250" Width="250" HorizontalAlignment="Center" Margin="10"/>
+            </StackPanel>
+        </Grid>
     </Grid>
 </Page>
