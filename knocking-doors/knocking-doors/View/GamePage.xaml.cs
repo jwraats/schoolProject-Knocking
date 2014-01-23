@@ -89,5 +89,10 @@ namespace knocking_doors.View
             DiffText.Text = kd.Player.currentDoor.Address;
             DoorPanel.ImageSource = kd.ImageStreet;
         }
+
+        private void NewDoorBtn_Click(object sender, RoutedEventArgs e)
+        {
+            changeDoor();
+        }
     }
 }
