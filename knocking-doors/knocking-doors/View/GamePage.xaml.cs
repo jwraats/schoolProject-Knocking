@@ -39,5 +39,11 @@ namespace knocking_doors.View
             }
         }
 
+        private void changeDoor()
+        {
+            kd.changeDoor();
+            
+        }
+
     }
 }

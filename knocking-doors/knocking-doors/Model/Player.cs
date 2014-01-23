@@ -13,6 +13,8 @@ namespace knocking_doors.Model
         public string CityName { get; set; }
         public double Longitude { get; set; }
         public double Latitude { get; set; }
+        public int Score { get; set; }
+        public Door currentDoor { get; set; }
 
         public Player()
         {
