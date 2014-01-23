@@ -66,7 +66,8 @@ namespace knocking_doors
 
             if (Player.currentDoor != null)
             {
-                Geofence gf = new Geofence("Door", new Geocircle(new BasicGeoposition{ Latitude = Player.currentDoor.Latitude, Longitude = Player.currentDoor.Longitude}, 15));
+                Geofence gf = new Geofence("Door"+DateTime.Now.Millisecond, new Geocircle(new BasicGeoposition{ Latitude = Player.currentDoor.Latitude, Longitude = Player.currentDoor.Longitude}, 15));
+                GeofenceMonitor.Current.Geofences.Clear();
                 GeofenceMonitor.Current.GeofenceStateChanged += Current_GeofenceStateChanged;
                 GeofenceMonitor.Current.Geofences.Add(gf);
 

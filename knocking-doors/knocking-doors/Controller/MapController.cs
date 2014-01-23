@@ -137,8 +137,6 @@ namespace knocking_doors.Controller
         {
             try
             {
-
-                System.Diagnostics.Debug.WriteLine("http://maps.googleapis.com/maps/api/geocode/xml?latlng=" + latitude + "," + longitude + "&sensor=false");
                 using (XmlReader reader = XmlReader.Create("http://maps.googleapis.com/maps/api/geocode/xml?latlng=" + latitude + "," + longitude + "&sensor=false")) {
                     while (reader.Read())
                     {
