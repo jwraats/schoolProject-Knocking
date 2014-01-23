@@ -19,6 +19,7 @@ namespace knocking_doors.Model
         public Player()
         {
             Level = new Level();
+            Score = 9999999;
         }
     }
 }
