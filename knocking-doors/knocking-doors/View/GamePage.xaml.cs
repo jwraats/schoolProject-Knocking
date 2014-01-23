@@ -27,22 +27,6 @@ namespace knocking_doors.View
         public GamePage()
         {
             this.InitializeComponent();
-
-            switch(kd.Difficult)
-            {
-                case KnockingDoors.Difficulties.First_Time:
-                    DiffText.Text = "First Timer";
-                    break;
-                case KnockingDoors.Difficulties.Been_Here:
-                    DiffText.Text = "Been Here";
-                    break;
-                case KnockingDoors.Difficulties.Born_Here:
-                    DiffText.Text = "Born Here";
-                    break;
-                default:
-                    DiffText.Text = "First Timer";
-                    break;
-            }
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -52,8 +36,29 @@ namespace knocking_doors.View
             if (kd != null)
             {
                 this.kd = kd;
+                switch (kd.Difficult)
+                {
+                    case KnockingDoors.Difficulties.First_Time:
+                        DiffText.Text = "First Timer";
+                        break;
+                    case KnockingDoors.Difficulties.Been_Here:
+                        DiffText.Text = "Been Here";
+                        break;
+                    case KnockingDoors.Difficulties.Born_Here:
+                        DiffText.Text = "Born Here";
+                        break;
+                    default:
+                        DiffText.Text = "First Timer";
+                        break;
+                }
             }
         }
 
+        public void UpdateDistanceIcon()
+        {
+            string red = "FF0000";
+            string blue = "#0000FF";
+            //DistanceIcon.Fill = ;
+        }
     }
 }
