@@ -87,7 +87,8 @@ namespace knocking_doors.View
         private void changeDoor()
         {
             kd.changeDoor();
-            DiffText.Text += "\n"+kd.Player.currentDoor.Address;
+            Address.Text = kd.Player.currentDoor.Address;
+            DistanceFromDoorText.Text = kd.mc.GetDistanceBetweenPoints(kd.Player.Latitude, kd.Player.Longitude, kd.Player.currentDoor.Latitude, kd.Player.currentDoor.Longitude)+" Meters";
             DoorPanel.ImageSource = kd.ImageStreet;
         }
 
