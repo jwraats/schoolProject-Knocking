@@ -44,17 +44,17 @@ namespace knocking_doors
                 int radius = 0;
                 int timeGiven = 10;
                 if(this.Difficult.Equals(KnockingDoors.Difficulties.First_Time)){
-                    radius = 10;
+                    radius = 50;
                     timeGiven = 100;
                 }
                 else if (this.Difficult.Equals(KnockingDoors.Difficulties.Been_Here))
                 {
-                    radius = 500;
+                    radius = 250;
                     timeGiven = 150;
                 }
                 else if (this.Difficult.Equals(KnockingDoors.Difficulties.Born_Here))
                 {
-                    radius = 1000;
+                    radius = 500;
                     timeGiven = 250;
                 }
 
