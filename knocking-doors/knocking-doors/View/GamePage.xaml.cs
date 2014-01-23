@@ -27,6 +27,22 @@ namespace knocking_doors.View
         public GamePage()
         {
             this.InitializeComponent();
+
+            switch(kd.Difficult)
+            {
+                case KnockingDoors.Difficulties.First_Time:
+                    DiffText.Text = "First Timer";
+                    break;
+                case KnockingDoors.Difficulties.Been_Here:
+                    DiffText.Text = "Been Here";
+                    break;
+                case KnockingDoors.Difficulties.Born_Here:
+                    DiffText.Text = "Born Here";
+                    break;
+                default:
+                    DiffText.Text = "First Timer";
+                    break;
+            }
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
