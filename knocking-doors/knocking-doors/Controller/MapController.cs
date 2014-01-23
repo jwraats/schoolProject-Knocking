@@ -36,13 +36,29 @@ namespace knocking_doors.Controller
             this.updateLocation(); //One time get Location.
         }
 
-        public BitmapImage getImageUrlFromGeoPoint(Geopoint point)
+
+        public BitmapImage getImageUrlFromGeoPoint(double lat, double lon)
         {
+
             string url = "https://cdn1.iconfinder.com/data/icons/musthave/128/Help.png";
-            if(point != null){
-                url = "http://maps.googleapis.com/maps/api/streetview?size=640x640&location=" + point.Position.Latitude + "," + point.Position.Longitude + "&sensor=false";
+            if (lat != -90000 && lon != -90000)
+            {
+                url = "http://maps.googleapis.com/maps/api/streetview?size=640x640&location=" + lat + "," + lon + "&sensor=false";
             }
             return new BitmapImage(new Uri(url, UriKind.Absolute));
+        }
+
+        public BitmapImage getImageUrlFromGeoPoint(Geopoint point)
+        {
+            if (point != null)
+            {
+                return this.getImageUrlFromGeoPoint(point.Position.Latitude, point.Position.Longitude);
+            }
+            else
+            {
+                return this.getImageUrlFromGeoPoint(-90000, -90000);
+            }
+            
         }
 
         public string getCityName()

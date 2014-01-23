@@ -60,5 +60,11 @@ namespace knocking_doors.View
             string blue = "#0000FF";
             //DistanceIcon.Fill = ;
         }
+
+        private void changeDoor()
+        {
+            kd.changeDoor();
+            
+        }
     }
 }
