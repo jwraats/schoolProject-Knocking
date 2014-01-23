@@ -44,7 +44,7 @@ namespace knocking_doors
                 int radius = 0;
                 int timeGiven = 10;
                 if(this.Difficult.Equals(KnockingDoors.Difficulties.First_Time)){
-                    radius = 50;
+                    radius = 100;
                     timeGiven = 100;
                 }
                 else if (this.Difficult.Equals(KnockingDoors.Difficulties.Been_Here))
