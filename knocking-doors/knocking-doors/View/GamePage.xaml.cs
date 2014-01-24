@@ -27,8 +27,8 @@ namespace knocking_doors.View
     {
         KnockingDoors kd;
         SolidColorBrush brush = new SolidColorBrush();
-        double myDbl = 0;
         string totalDistance;
+        knocking_doors.Model.Player player;
 
         public GamePage()
         {
@@ -58,9 +58,13 @@ namespace knocking_doors.View
                         DiffText.Text = "First Timer";
                         break;
                 }
-                ScoreText.DataContext = kd.Player.ScoreBind;
                 this.changeDoor();  //Eerste keer deur maken!
 
+                //Databinding naar player
+                player = kd.Player;
+                ScoreText.DataContext = player;
+                Binding binding = new Binding() { Path = new PropertyPath("Score") };
+                ScoreText.SetBinding(TextBlock.TextProperty, binding);
 
                 //Verander de timer
                 Timer aTimer = new Timer(new TimerCallback(timeAction), null, 0, 1000);
@@ -72,7 +76,7 @@ namespace knocking_doors.View
             if(kd.Player.currentDoor != null){
                 if (kd.Player.currentDoor.TimeLeft <= 1)    //Jammer!! Maar niet optijd!
                 {
-                    kd.Player.Score -= 10;
+                    kd.Player.ScoreBind -= 10;
                     changeDoor();
                 }
                 else {
@@ -92,7 +96,7 @@ namespace knocking_doors.View
                 //Oplosing omdat Geofence zo buggie is :)
                 if (distanceToGoDbl <= 15) //het is dus binnen 15 meter!
                 {
-                    kd.Player.Score += (5 * kd.Player.currentDoor.TimeLeft) + 10;   //Super mooie berekening
+                    kd.Player.ScoreBind += (5 * kd.Player.currentDoor.TimeLeft) + 10;   //Super mooie berekening
                     //Gewonnen!
                     //TODO!! 
                     //changeDoor();
@@ -150,7 +154,7 @@ namespace knocking_doors.View
 
         private void NewDoorBtn_Click(object sender, RoutedEventArgs e)
         {
-            kd.Player.Score -= 10;
+            kd.Player.ScoreBind -= 10;
             changeDoor();
         }
 

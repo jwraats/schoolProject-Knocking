@@ -15,7 +15,7 @@ namespace knocking_doors.Model
         public double Longitude { get; set; }
         public double Latitude { get; set; }
         public Door currentDoor { get; set; }
-        public int Score;
+        public int Score { get; set; }
         public int ScoreBind
         {
             get { return Score; }
@@ -25,13 +25,13 @@ namespace knocking_doors.Model
                 NotifyPropertyChanged("Score");
             }
         }
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public Player()
         {
             Level = new Level();
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
         private void NotifyPropertyChanged(String info)
         {
             if (PropertyChanged != null)
