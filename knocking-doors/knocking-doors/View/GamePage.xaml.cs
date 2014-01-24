@@ -50,16 +50,16 @@ namespace knocking_doors.View
                 switch (kd.Difficult)
                 {
                     case KnockingDoors.Difficulties.First_Time:
-                        DiffText.Text = "First Timer";
+                        DiffText.Text = "Nieuw hier";
                         break;
                     case KnockingDoors.Difficulties.Been_Here:
-                        DiffText.Text = "Been Here";
+                        DiffText.Text = "Bekend terrein";
                         break;
                     case KnockingDoors.Difficulties.Born_Here:
-                        DiffText.Text = "Born Here";
+                        DiffText.Text = "Hometown";
                         break;
                     default:
-                        DiffText.Text = "First Timer";
+                        DiffText.Text = "Nieuw hier";
                         break;
                 }
                 this.changeDoor();  //Eerste keer deur maken!
