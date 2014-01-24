@@ -71,58 +71,57 @@ namespace knocking_doors.View
                 ScoreText.SetBinding(TextBlock.TextProperty, binding);
 
                 //Verander de timer
-                Timer aTimer = new Timer(new TimerCallback(timeAction), null, 0, 1000);
+                //Timer aTimer = new Timer(new TimerCallback(timeAction), null, 0, 1000);
+                DispatcherTimer dTimer = new DispatcherTimer();
+                dTimer.Interval = TimeSpan.FromSeconds(1);
+                dTimer.Tick += timeAction;
+                dTimer.Start();
             }
         }
-
-        private async void timeAction(object state)
+        private void timeAction(object state, object e)
         {
-            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal,() =>
-            {
-                    if(kd.Player.currentDoor != null){
-                        if (kd.Player.currentDoor.TimeLeft <= 1 && inGame)    //Jammer!! Maar niet optijd!
-                        {
-
-                            inGame = false;
-                                kd.Player.ScoreBind -= 10;
-                                //updateChangeDoor();
-                        }
-                        else {
-                            kd.Player.currentDoor.TimeLeft -= 1;    //Aftellen!
-                            System.Diagnostics.Debug.WriteLine(kd.Player.currentDoor.TimeLeft+" s");
-                        }
-                
-                    }
-                    kd.changePlayerLocation();
-
-
-            
-
-                    string distanceToGo = kd.mc.GetDistanceBetweenPoints(kd.Player.Latitude, kd.Player.Longitude, kd.Player.currentDoor.Latitude, kd.Player.currentDoor.Longitude);
-                    System.Diagnostics.Debug.WriteLine(distanceToGo + " M");
-                    if (distanceToGo != "Onbekend")
+                if (kd.Player.currentDoor != null)
+                {
+                    if (kd.Player.currentDoor.TimeLeft <= 1 && inGame)    //Jammer!! Maar niet optijd!
                     {
-                        distanceToGoDbl = Convert.ToDouble(distanceToGo);
-                        System.Diagnostics.Debug.WriteLine(distanceToGo + " MDB");    
-                        //Oplosing omdat Geofence zo buggie is :)
-                        if (distanceToGoDbl <= 15) //het is dus binnen 15 meter!
-                        {
-                            kd.Player.ScoreBind += (5 * kd.Player.currentDoor.TimeLeft) + 10;   //Super mooie berekening
-                            //Gewonnen!
-                            //updateChangeDoor();
-                        }
 
-                        if (totalDistance != "Onbekend")
-                        {
-                            totalDistanceDbl = Convert.ToDouble(totalDistance);
-                            //Zorgen dat het warm/koud element het doet
-                            hotCold = (distanceToGoDbl - totalDistanceDbl) / totalDistanceDbl;
-
-                            //Zorgen dat deze threath elkaar niet tegenspreekt!
-                            UpdateDistanceIcon(hotCold);
-                        }
+                        inGame = false;
+                        kd.Player.ScoreBind -= 10;
+                        changeDoor();
                     }
-            });
+                    else
+                    {
+                        kd.Player.currentDoor.TimeLeft -= 1;    //Aftellen!
+                    }
+
+                }
+                kd.changePlayerLocation();
+
+
+
+
+                string distanceToGo = kd.mc.GetDistanceBetweenPoints(kd.Player.Latitude, kd.Player.Longitude, kd.Player.currentDoor.Latitude, kd.Player.currentDoor.Longitude);
+                if (distanceToGo != "Onbekend")
+                {
+                    distanceToGoDbl = Convert.ToDouble(distanceToGo);
+                    //Oplosing omdat Geofence zo buggie is :)
+                    if (distanceToGoDbl <= 15) //het is dus binnen 15 meter!
+                    {
+                        kd.Player.ScoreBind += (5 * kd.Player.currentDoor.TimeLeft) + 10;   //Super mooie berekening
+                        //Gewonnen!
+                        changeDoor();
+                    }
+
+                    if (totalDistance != "Onbekend")
+                    {
+                        totalDistanceDbl = Convert.ToDouble(totalDistance);
+                        //Zorgen dat het warm/koud element het doet
+                        hotCold = (distanceToGoDbl - totalDistanceDbl) / totalDistanceDbl;
+
+                        //Zorgen dat deze threath elkaar niet tegenspreekt!
+                        UpdateDistanceIcon(hotCold);
+                    }
+                }  
         }
 
 
@@ -139,7 +138,6 @@ namespace knocking_doors.View
                 totalDistance = kd.mc.GetDistanceBetweenPoints(kd.Player.Latitude, kd.Player.Longitude, kd.Player.currentDoor.Latitude, kd.Player.currentDoor.Longitude);
                 DistanceFromDoorText.Text = totalDistance + " Meters";
                 DoorPanel.ImageSource = kd.ImageStreet;
-                System.Diagnostics.Debug.WriteLine("Werkt het? updateChangeDoor?");
             });
 
         }
@@ -174,7 +172,19 @@ namespace knocking_doors.View
                 DistanceText.Text = "Heet! Heet! Heet!";
 
 
-            DistanceText.Text += "\n" + distanceToGoDbl;
+            DistanceText.Text += "\n";
+            if(kd.Player.currentDoor.TimeLeft > 0){
+                if (kd.Player.currentDoor.TimeLeft >= 60)
+                {
+                    DistanceText.Text += (kd.Player.currentDoor.TimeLeft / 60)+" m ";
+                }
+                DistanceText.Text += (kd.Player.currentDoor.TimeLeft % 60) + " s";
+            }
+            else
+            {
+                DistanceText.Text += "Geen tijd meer over";
+            }
+
             byte red = (byte)Math.Floor(255*d);
             byte blue = (byte)Math.Floor(255-255*d);
             DistanceIcon.Fill = new SolidColorBrush(Color.FromArgb(255, red, 0, blue));
