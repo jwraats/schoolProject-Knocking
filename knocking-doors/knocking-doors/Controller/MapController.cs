@@ -162,7 +162,7 @@ namespace knocking_doors.Controller
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine( ex.Message);
-                return "Jammmeeerrrr";
+                return "te veel aanvragen!";
             }
         }
 

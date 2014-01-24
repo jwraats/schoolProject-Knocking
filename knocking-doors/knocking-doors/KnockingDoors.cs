@@ -46,7 +46,7 @@ namespace knocking_doors
                 int timeGiven = 10;
                 if(this.Difficult.Equals(KnockingDoors.Difficulties.First_Time)){
                     radius = 100;
-                    timeGiven = 100;
+                    timeGiven = 10;
                 }
                 else if (this.Difficult.Equals(KnockingDoors.Difficulties.Been_Here))
                 {
@@ -68,7 +68,7 @@ namespace knocking_doors
             {
                 Geofence gf = new Geofence("Door"+DateTime.Now.Millisecond, new Geocircle(new BasicGeoposition{ Latitude = Player.currentDoor.Latitude, Longitude = Player.currentDoor.Longitude}, 15));
                 GeofenceMonitor.Current.Geofences.Clear();
-                GeofenceMonitor.Current.GeofenceStateChanged += Current_GeofenceStateChanged;
+                
                 GeofenceMonitor.Current.Geofences.Add(gf);
 
 
@@ -76,18 +76,6 @@ namespace knocking_doors
             }
         }
 
-        private void Current_GeofenceStateChanged(GeofenceMonitor sender, object args)
-        {
-            var reports = sender.ReadReports();
-
-            foreach(GeofenceStateChangeReport report in reports){
-                GeofenceState state = report.NewState;
-                Geofence gf = report.Geofence;
-                if(state == GeofenceState.Entered){
-                    Player.Score += 50;
-                }
-            }
-        }
 
         public void changePlayerLocation()
         {
