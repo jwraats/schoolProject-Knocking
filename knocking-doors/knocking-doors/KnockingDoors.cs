@@ -96,8 +96,12 @@ namespace knocking_doors
             {
                 Player.Latitude = mc.getGeoposition().Coordinate.Point.Position.Latitude;
                 Player.Longitude = mc.getGeoposition().Coordinate.Point.Position.Longitude;
-                this.ImageStreet = mc.getImageUrlFromGeoPoint(mc.ReverseGeoLoc(Player.Latitude, Player.Longitude));
             }
+        }
+
+        public void changePlayerImage()
+        {
+            this.ImageStreet = mc.getImageUrlFromGeoPoint(mc.ReverseGeoLoc(Player.Latitude, Player.Longitude));
         }
     }
 }

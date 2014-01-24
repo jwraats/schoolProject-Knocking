@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI;
@@ -27,6 +28,7 @@ namespace knocking_doors.View
         KnockingDoors kd;
         SolidColorBrush brush = new SolidColorBrush();
         double myDbl = 0;
+        string totalDistance;
 
         public GamePage()
         {
@@ -58,7 +60,59 @@ namespace knocking_doors.View
                 }
                 ScoreText.DataContext = kd.Player.ScoreBind;
                 this.changeDoor();  //Eerste keer deur maken!
+
+
+                //Verander de timer
+                Timer aTimer = new Timer(new TimerCallback(timeAction), null, 0, 1000);
             }
+        }
+
+        private void timeAction(object state)
+        {
+            if(kd.Player.currentDoor != null){
+                if (kd.Player.currentDoor.TimeLeft <= 1)    //Jammer!! Maar niet optijd!
+                {
+                    kd.Player.Score -= 10;
+                    changeDoor();
+                }
+                else {
+                    kd.Player.currentDoor.TimeLeft -= 1;    //Aftellen!
+                }
+                
+            }
+            kd.changePlayerLocation();
+
+
+            
+
+            string distanceToGo = kd.mc.GetDistanceBetweenPoints(kd.Player.Latitude, kd.Player.Longitude, kd.Player.currentDoor.Latitude, kd.Player.currentDoor.Longitude);
+            if (distanceToGo != "Onbekend")
+            {
+                double distanceToGoDbl = Convert.ToDouble(distanceToGo);
+                //Oplosing omdat Geofence zo buggie is :)
+                if (distanceToGoDbl <= 15) //het is dus binnen 15 meter!
+                {
+                    kd.Player.Score += (5 * kd.Player.currentDoor.TimeLeft) + 10;   //Super mooie berekening
+                    //Gewonnen!
+                    //TODO!! 
+                    //changeDoor();
+                }
+
+                if (totalDistance != "Onbekend")
+                {
+                    double totalDistanceDbl = Convert.ToDouble(totalDistance);
+                    //Zorgen dat het warm/koud element het doet
+                    double hotCold = totalDistanceDbl / distanceToGoDbl;
+                    //UpdateDistanceIcon(hotCold);
+                    //Zorgen dat deze threath elkaar niet tegenspreekt!
+                }
+            }
+            
+            
+
+            
+
+            
         }
 
         public void UpdateDistanceIcon(double d)
@@ -89,7 +143,8 @@ namespace knocking_doors.View
             kd.changeDoor();
             Address.Text = kd.Player.currentDoor.Address;
             Address.Text += kd.Player.currentDoor.Latitude + "," + kd.Player.currentDoor.Longitude;
-            DistanceFromDoorText.Text = kd.mc.GetDistanceBetweenPoints(kd.Player.Latitude, kd.Player.Longitude, kd.Player.currentDoor.Latitude, kd.Player.currentDoor.Longitude)+" Meters";
+            totalDistance = kd.mc.GetDistanceBetweenPoints(kd.Player.Latitude, kd.Player.Longitude, kd.Player.currentDoor.Latitude, kd.Player.currentDoor.Longitude);
+            DistanceFromDoorText.Text = totalDistance+" Meters";
             DoorPanel.ImageSource = kd.ImageStreet;
         }
 
@@ -102,6 +157,7 @@ namespace knocking_doors.View
         private void BackToDiffBtn_Click(object sender, RoutedEventArgs e)
         {
             kd.changePlayerLocation();
+            kd.changePlayerImage();
             kd.changePage(typeof(View.LevelPage));
         }
     }

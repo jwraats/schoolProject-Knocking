@@ -14,6 +14,7 @@ using System.Text;
 using System.Xml;
 using Windows.Data.Xml.Dom;
 using System.Xml.Linq;
+using Windows.UI.Core;
 
 
 
@@ -40,11 +41,11 @@ namespace knocking_doors.Controller
             geolocator = new Geolocator();
             geolocator.DesiredAccuracy = Windows.Devices.Geolocation.PositionAccuracy.High;
             
-            
             //For get location;
             pos = null;
             this.updateLocation(); //One time get Location.
         }
+
 
         public BitmapImage getImageUrlFromGeoPoint(string address)
         {
@@ -154,12 +155,8 @@ namespace knocking_doors.Controller
                                 break;
                         }
                     } 
-
-
                     return reader.ReadElementContentAsString();
-                }
-                return "Oeepppsss...";
-                
+                }                
 
             }
             catch (Exception ex)

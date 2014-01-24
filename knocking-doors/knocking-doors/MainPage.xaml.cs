@@ -42,6 +42,7 @@ namespace knocking_doors
         {
             kd.Player.Name = tbName.Text;
             kd.changePlayerLocation();
+            kd.changePlayerImage();
             kd.changePage(typeof(View.LevelPage));
         }
     }
