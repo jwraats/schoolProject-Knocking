@@ -7,6 +7,7 @@ using System.Threading;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI;
+using Windows.UI.Core;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -29,6 +30,7 @@ namespace knocking_doors.View
         SolidColorBrush brush = new SolidColorBrush();
         double myDbl = 0;
         string totalDistance;
+        double hotCold;
 
         public GamePage()
         {
@@ -73,7 +75,7 @@ namespace knocking_doors.View
                 if (kd.Player.currentDoor.TimeLeft <= 1)    //Jammer!! Maar niet optijd!
                 {
                     kd.Player.Score -= 10;
-                    changeDoor();
+                    updateChangeDoor();
                 }
                 else {
                     kd.Player.currentDoor.TimeLeft -= 1;    //Aftellen!
@@ -94,25 +96,49 @@ namespace knocking_doors.View
                 {
                     kd.Player.Score += (5 * kd.Player.currentDoor.TimeLeft) + 10;   //Super mooie berekening
                     //Gewonnen!
-                    //TODO!! 
-                    //changeDoor();
+                    updateChangeDoor();
                 }
 
                 if (totalDistance != "Onbekend")
                 {
                     double totalDistanceDbl = Convert.ToDouble(totalDistance);
                     //Zorgen dat het warm/koud element het doet
-                    double hotCold = totalDistanceDbl / distanceToGoDbl;
-                    //UpdateDistanceIcon(hotCold);
+                    hotCold = (distanceToGoDbl - totalDistanceDbl) / totalDistanceDbl;
+
                     //Zorgen dat deze threath elkaar niet tegenspreekt!
+                    UpdateDistance();
                 }
             }
             
-            
+        }
 
-            
 
-            
+        private async void updateChangeDoor()
+        {
+
+            await Dispatcher.RunAsync(CoreDispatcherPriority.High,
+            () =>
+            {
+                kd.changeDoor();
+                Address.Text = kd.Player.currentDoor.Address;
+                Address.Text += kd.Player.currentDoor.Latitude + "," + kd.Player.currentDoor.Longitude;
+                totalDistance = kd.mc.GetDistanceBetweenPoints(kd.Player.Latitude, kd.Player.Longitude, kd.Player.currentDoor.Latitude, kd.Player.currentDoor.Longitude);
+                DistanceFromDoorText.Text = totalDistance + " Meters";
+                DoorPanel.ImageSource = kd.ImageStreet;
+                System.Diagnostics.Debug.WriteLine("Werkt het? updateChangeDoor?");
+            });
+
+        }
+
+        private async void UpdateDistance()
+        {
+
+            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+            () =>
+            {
+                UpdateDistanceIcon(hotCold);
+            });
+
         }
 
         public void UpdateDistanceIcon(double d)
@@ -137,6 +163,7 @@ namespace knocking_doors.View
             byte blue = (byte)Math.Floor(255-255*d);
             DistanceIcon.Fill = new SolidColorBrush(Color.FromArgb(255, red, 0, blue));
         }
+
 
         private void changeDoor()
         {
