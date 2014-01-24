@@ -27,12 +27,13 @@ namespace knocking_doors.View
     /// </summary>
     public sealed partial class GamePage : Page
     {
-        KnockingDoors kd;
-        SolidColorBrush brush = new SolidColorBrush();
-        string totalDistance;
+        private KnockingDoors kd;
+        private SolidColorBrush brush = new SolidColorBrush();
+        private string totalDistance;
         Player player;
-        bool inGame = true;
-        double hotCold, totalDistanceDbl, distanceToGoDbl;
+        private bool inGame = true;
+        private double hotCold, totalDistanceDbl, distanceToGoDbl;
+        private DispatcherTimer dTimer = new DispatcherTimer();
 
         public GamePage()
         {
@@ -72,7 +73,6 @@ namespace knocking_doors.View
 
                 //Verander de timer
                 //Timer aTimer = new Timer(new TimerCallback(timeAction), null, 0, 1000);
-                DispatcherTimer dTimer = new DispatcherTimer();
                 dTimer.Interval = TimeSpan.FromSeconds(1);
                 dTimer.Tick += timeAction;
                 dTimer.Start();
@@ -105,8 +105,9 @@ namespace knocking_doors.View
                 {
                     distanceToGoDbl = Convert.ToDouble(distanceToGo);
                     //Oplosing omdat Geofence zo buggie is :)
-                    if (distanceToGoDbl <= 15) //het is dus binnen 15 meter!
+                    if (distanceToGoDbl <= 15 && inGame) //het is dus binnen 15 meter!
                     {
+                        inGame = false;
                         kd.Player.ScoreBind += (5 * kd.Player.currentDoor.TimeLeft) + 10;   //Super mooie berekening
                         //Gewonnen!
                         changeDoor();
@@ -122,35 +123,6 @@ namespace knocking_doors.View
                         UpdateDistanceIcon(hotCold);
                     }
                 }  
-        }
-
-
-        private async void updateChangeDoor()
-        {
-
-            await Dispatcher.RunAsync(CoreDispatcherPriority.High,
-            () =>
-            {
-                kd.changeDoor();
-                inGame = true;
-                Address.Text = kd.Player.currentDoor.Address;
-                Address.Text += kd.Player.currentDoor.Latitude + "," + kd.Player.currentDoor.Longitude;
-                totalDistance = kd.mc.GetDistanceBetweenPoints(kd.Player.Latitude, kd.Player.Longitude, kd.Player.currentDoor.Latitude, kd.Player.currentDoor.Longitude);
-                DistanceFromDoorText.Text = totalDistance + " Meters";
-                DoorPanel.ImageSource = kd.ImageStreet;
-            });
-
-        }
-
-        private async void UpdateDistance()
-        {
-
-            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
-            () =>
-            {
-                UpdateDistanceIcon(hotCold);
-            });
-
         }
 
         public void UpdateDistanceIcon(double d)
@@ -210,6 +182,7 @@ namespace knocking_doors.View
 
         private void BackToDiffBtn_Click(object sender, RoutedEventArgs e)
         {
+            dTimer.Stop();
             kd.changePlayerLocation();
             kd.changePlayerImage();
             kd.changePage(typeof(View.LevelPage));

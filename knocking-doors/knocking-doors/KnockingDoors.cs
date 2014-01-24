@@ -64,7 +64,7 @@ namespace knocking_doors
                 BasicGeoposition basGeo = mc.getRandomGeoposition(Player.Level.Longitude, Player.Level.Latitude, radius);
                 //Overschrijf timeGiven naar de meters
                 string meters = mc.GetDistanceBetweenPoints(Player.Level.Longitude, Player.Level.Latitude, basGeo.Latitude, basGeo.Longitude);
-                if (meters != "Onbekend") { timeGiven = Convert.ToInt32(meters) * 6; }
+                if (meters != "Onbekend") { timeGiven = Convert.ToInt32(Convert.ToDouble(meters)) * 6; }
                 Player.currentDoor = new Door() { Latitude = basGeo.Latitude, Longitude = basGeo.Longitude, TimeLeft = timeGiven, Address = mc.ReverseGeoLoc(basGeo.Latitude, basGeo.Longitude) };
 
             }
