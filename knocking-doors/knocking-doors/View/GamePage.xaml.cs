@@ -105,7 +105,7 @@ namespace knocking_doors.View
                 {
                     distanceToGoDbl = Convert.ToDouble(distanceToGo);
                     //Oplosing omdat Geofence zo buggie is :)
-                    if (distanceToGoDbl <= 15 && inGame) //het is dus binnen 15 meter!
+                    if (distanceToGoDbl <= 35 && inGame) //het is dus binnen 35 meter!
                     {
                         inGame = false;
                         kd.Player.ScoreBind += (5 * kd.Player.currentDoor.TimeLeft) + 10;   //Super mooie berekening

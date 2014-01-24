@@ -46,25 +46,22 @@ namespace knocking_doors
                 int timeGiven = 10;
                 if(this.Difficult.Equals(KnockingDoors.Difficulties.First_Time)){
                     radius = 100;
-                    timeGiven = 100;
+                    timeGiven = 360;
                 }
                 else if (this.Difficult.Equals(KnockingDoors.Difficulties.Been_Here))
                 {
                     radius = 250;
-                    timeGiven = 150;
+                    timeGiven = 480;
                 }
                 else if (this.Difficult.Equals(KnockingDoors.Difficulties.Born_Here))
                 {
                     radius = 500;
-                    timeGiven = 250;
+                    timeGiven = 600;
                 }
 
                 
 
                 BasicGeoposition basGeo = mc.getRandomGeoposition(Player.Level.Longitude, Player.Level.Latitude, radius);
-                //Overschrijf timeGiven naar de meters
-                string meters = mc.GetDistanceBetweenPoints(Player.Level.Longitude, Player.Level.Latitude, basGeo.Latitude, basGeo.Longitude);
-                if (meters != "Onbekend") { timeGiven = Convert.ToInt32(Convert.ToDouble(meters)) * 6; }
                 Player.currentDoor = new Door() { Latitude = basGeo.Latitude, Longitude = basGeo.Longitude, TimeLeft = timeGiven, Address = mc.ReverseGeoLoc(basGeo.Latitude, basGeo.Longitude) };
 
             }
